@@ -99,6 +99,7 @@ public int main()
                 withdrawBalance(balance, withdrawl);
                 break;
             case 4:
+                system("cls");
                 exit(0);
                 break;
         }
