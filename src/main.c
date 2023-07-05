@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 #define private static
 #define public
@@ -11,7 +12,7 @@ Creating a simple bank manegment system
 struct user 
 {
     char name[25], pwd[25];
-    double balance;
+    float balance;
 };
 
 private void login(char name[], char password[])
@@ -24,31 +25,39 @@ private void createAccount()
    printf(""); 
 }
 
-private void getBalance(double balance)
+private void getBalance(float balance)
 {
-    printf("Your balance is %lf\n", balance);
+    printf("\nYour balance is %f\n\n", balance);
 }
 
-private void depositBalance(double balance, double amount)
+private float depositBalance(float balance, float amount)
 {   
     balance += amount;
-    prinf("Your new balance is %lf\n", balance);
+    printf("\nYour new balance is %f\n\n", balance);
+    return balance;
 }
 
-private void withdrawBalance(double balance, double amount)
+private float withdrawBalance(float balance, float amount)
 {
     if (balance <= 0) {
-        printf("Your balance is zero or negative, so it is not possible to withdraw\n");
+        printf("\nYour balance is zero or negative, so it is not possible to withdraw\n");
         exit(0);
     } else {
         balance -= amount;
-        printf("Your new balance is %lf\n", balance);
+        printf("\nYour new balance is %f\n\n", balance);
+        return balance;
     }
+}
+
+private void options()
+{
+    printf("Please choose one of the listed options\n\n");
+    printf(" 1) Check balance\n 2) Deposite amount\n 3) Withdraw amount\n 4) Exit\n\n");
 }
 
 public int main()
 {   
-    /* IMPLEMENT AFTER MAIN 
+    /* IMPLEMENT AFTER MAIN LOOP
     char input;
     printf("Hi! Welcome to Secret Bank! \n 1) Create new account.\n 2) Login.\n");
     fgets(input, sizeof(input), stdin);
@@ -59,23 +68,29 @@ public int main()
         break;
     case '2':
         login;
-        break;
+        break; 
     default:
         printf("Invalid input.\n Please enter either 1 or 2.");
         break;
     }
     */
 
-    double balance;
+   FILE *fptr;
+
+    fptr = fopen("balance.txt", "r");
+    char balance;
+    fgets(balance, 20, fptr);
+    float balance;
+
 
     system("cls");
     printf("\n Hi! WELCOMME TO SECRET BANK\n\n");
-    printf("Please choose one of the listed options\n\n");
-    printf(" 1) Check balance\n 2) Deposite amount\n 3) Withdraw amount\n 4) Exit\n\n");
 
-    // User input
     while (1) 
-    {
+    {   
+        // Running options meny each iteration
+        options();
+
         int choice;
 
         printf("Enter your choice: ");
@@ -86,17 +101,17 @@ public int main()
             case 1:
                 getBalance(balance);
                 break;
-            case 2:
-                double inputAmount;
-                printf("Please spesify amount: ");
-                scanf("%lf", &inputAmount);
-                depositBalance(balance, inputAmount);
+            case 2: ;
+                float inputAmount;
+                printf("\nPlease spesify amount: ");
+                scanf("%f", &inputAmount);
+                balance = depositBalance(balance, inputAmount);
                 break;
-            case 3:
-                double withdrawl;
-                printf("Please spesify amount: ");
-                scanf("%lf", &withdrawl);
-                withdrawBalance(balance, withdrawl);
+            case 3: ;
+                float withdrawl;
+                printf("\nPlease spesify amount: ");
+                scanf("%f", &withdrawl);
+                balance = withdrawBalance(balance, withdrawl);
                 break;
             case 4:
                 system("cls");
@@ -104,6 +119,11 @@ public int main()
                 break;
         }
     }
+    // Saving balance to text file
+    fptr = fopen("balance.txt", "w");
+    fprintf(fptr, (char) balance); 
+    fclose(fptr);
 
     return 0;
 }
+ 
