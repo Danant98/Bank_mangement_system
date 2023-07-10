@@ -27,7 +27,7 @@ private void createAccount()
 
 private void getBalance(float balance)
 {   
-    System("cls");
+    system("cls");
     int userInput;
     
     printf("\nBalance: %.3f\n\n", balance);
