@@ -109,7 +109,7 @@ public int main()
     fgets(balance, 20, fptr);
     float balance;
     */
-    double balance;
+    char balance;
 
     system("cls");
     printf("\n Hi! WELCOMME TO SECRET BANK\n\n"); 
