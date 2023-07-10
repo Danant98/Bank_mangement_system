@@ -67,7 +67,7 @@ private double withdrawBalance(double balance, double amount)
 {
     if (balance <= 0) {
         printf("\nYour balance is zero or negative, so it is not possible to withdraw\n");
-        exit(0);
+        return;
     } else {
         balance -= amount;
         printf("\nYour new balance is %.3f\n\n", balance);
