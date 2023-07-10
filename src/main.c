@@ -25,20 +25,21 @@ private void createAccount()
    printf("To be done!"); 
 }
 
-private void getBalance(float balance)
+private void getBalance(double balance)
 {   
     system("cls");
     int userInput;
     
     printf("\nBalance: %.3f\n\n", balance);
 
-    printf("\n\n 1) Back \n2) Exit");
-    printf("Enter: ");
+    printf("\n\n1) Back \n2) Exit");
+    printf("\n\nEnter: ");
     scanf("%d", &userInput);
 
     switch (userInput)
     {
     case 1:
+    system("cls");
         break;
     
     case 2:
@@ -51,7 +52,7 @@ private void getBalance(float balance)
     }
 }
 
-private float depositBalance(float balance, float amount)
+private double depositBalance(double balance, double amount)
 {   
     system("cls");
     balance += amount;
@@ -62,7 +63,7 @@ private float depositBalance(float balance, float amount)
     return balance;
 }
 
-private float withdrawBalance(float balance, float amount)
+private double withdrawBalance(double balance, double amount)
 {
     if (balance <= 0) {
         printf("\nYour balance is zero or negative, so it is not possible to withdraw\n");
@@ -108,7 +109,7 @@ public int main()
     fgets(balance, 20, fptr);
     float balance;
     */
-    char balance;
+    double balance;
 
     system("cls");
     printf("\n Hi! WELCOMME TO SECRET BANK\n\n"); 
@@ -130,14 +131,14 @@ public int main()
                 break;
 
             case 2: ;
-                float inputAmount;
+                double inputAmount;
                 printf("\nPlease spesify amount: ");
                 scanf("%f", &inputAmount);
                 balance = depositBalance(balance, inputAmount);
                 break;
 
             case 3: ;
-                float withdrawl;
+                double withdrawl;
                 printf("\nPlease spesify amount: ");
                 scanf("%f", &withdrawl);
                 balance = withdrawBalance(balance, withdrawl);
