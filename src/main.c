@@ -9,7 +9,7 @@
 Creating a simple bank manegment system
 */
 
-struct user 
+private struct user 
 {
     char name[25], pwd[25];
     float balance;
@@ -25,7 +25,7 @@ private void createAccount()
    printf("To be done!"); 
 }
 
-private void getBalance(double balance)
+private void getBalance(float balance)
 {   
     system("cls");
     int userInput;
@@ -52,7 +52,7 @@ private void getBalance(double balance)
     }
 }
 
-private double depositBalance(double balance, double amount)
+private float depositBalance(float balance, float amount)
 {   
     system("cls");
     balance += amount;
@@ -63,11 +63,11 @@ private double depositBalance(double balance, double amount)
     return balance;
 }
 
-private double withdrawBalance(double balance, double amount)
+private float withdrawBalance(float balance, float amount)
 {
     if (balance <= 0) {
         printf("\nYour balance is zero or negative, so it is not possible to withdraw\n");
-        return;
+        return -1;
     } else {
         balance -= amount;
         printf("\nYour new balance is %.3f\n\n", balance);
@@ -75,8 +75,44 @@ private double withdrawBalance(double balance, double amount)
     }
 }
 
-private void options()
+private int fecthBalance() 
+{   
+
+    FILE *fptr = fopen("account.txt", 'r');
+   // Checking to see if account exists
+   if (fptr == NULL) {
+        printf("Account is not found, please create a new account!");
+        return -1;
+   }
+
+
+    // Closing file
+    fclose(fptr);
+
+    return 0;
+}
+
+private int setBalance(float balance)
 {
+    FILE *fptr = fopen("account.txt", 'w');
+   // Checking to see if account exists
+   if (fptr == NULL) {
+        printf("Account is not found, please create a new account!");
+        return -1;
+   }
+
+   fprintf(fptr, "Balance: %.2f", balance);
+
+    // Closing file
+    fclose(fptr);
+
+    return 0;
+}
+
+
+private void options()
+{   
+    printf("\n Hi! WELCOMME TO SECRET BANK\n\n"); 
     printf("Please choose one of the listed options\n\n");
     printf(" 1) Check balance\n 2) Deposite amount\n 3) Withdraw amount\n 4) Exit\n\n");
 }
@@ -100,19 +136,10 @@ public int main()
         break;
     }
     */
-
-   FILE *fptr;
-
-    /*
-    fptr = fopen("balance.txt", "r");
-    char balance;
-    fgets(balance, 20, fptr);
+    
     float balance;
-    */
-    char balance;
 
     system("cls");
-    printf("\n Hi! WELCOMME TO SECRET BANK\n\n"); 
 
     while (1) 
     {   
@@ -131,14 +158,14 @@ public int main()
                 break;
 
             case 2: ;
-                double inputAmount;
+                float inputAmount;
                 printf("\nPlease spesify amount: ");
                 scanf("%f", &inputAmount);
                 balance = depositBalance(balance, inputAmount);
                 break;
 
             case 3: ;
-                double withdrawl;
+                float withdrawl;
                 printf("\nPlease spesify amount: ");
                 scanf("%f", &withdrawl);
                 balance = withdrawBalance(balance, withdrawl);
@@ -150,16 +177,11 @@ public int main()
                 break;
 
             default:
-                printf("\n\n Invalid command recived!\n Please specify a number between 1-4.");
+                printf("\n\n Invalid command recived!\n Please specify a integer between 1-4.");
                 break;
         }
     }
-    // Saving balance to text file
-    /*
-    fptr = fopen("balance.txt", "w");
-    fprintf(fptr, (char) balance); 
-    fclose(fptr);
-    */
+
     return 0;
 }
  
