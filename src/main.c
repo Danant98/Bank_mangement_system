@@ -65,14 +65,14 @@ private float depositBalance(float balance, float amount)
 
 private float withdrawBalance(float balance, float amount)
 {
-    if (balance <= 0) {
-        printf("\nYour balance is zero or negative, so it is not possible to withdraw\n");
-        return -1;
-    } else {
-        balance -= amount;
-        printf("\nYour new balance is %.3f\n\n", balance);
+    if (balance <= 0 || balance - amount < 0) {
+        printf("\nYour balance is zero or negative or your balance will become negative, so it is not possible to withdraw\n");
         return balance;
     }
+    
+    balance -= amount;
+    printf("\nYour new balance is %.3f\n\n", balance);
+    return balance;
 }
 
 private int fecthBalance() 
