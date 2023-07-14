@@ -75,7 +75,7 @@ private float withdrawBalance(float balance, float amount)
     return balance;
 }
 
-private int fecthBalance() 
+private float fecthBalance() 
 {   
 
     FILE *fptr = fopen("account.txt", 'r');
@@ -137,7 +137,7 @@ public int main()
     }
     */
     
-    float balance;
+    float balance = fecthBalance();
 
     system("cls");
 
